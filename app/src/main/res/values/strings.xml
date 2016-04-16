@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="lesson">Хичээл</string>
+    <string name="example">Жишээ</string>
+    <string name="question">Асуулт</string>
+    <string name="quiz">Асуулт хариулт</string>
+    <string name="setting">Тохиргоо</string>
+    <string name="title">Өгөгдлийн нууцлал,аюулгүй байдал</string>
+
+</resources>

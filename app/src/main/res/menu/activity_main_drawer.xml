@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/lesson"
+            android:icon="@drawable/book"
+            android:title="@string/lesson" />
+        <item
+            android:id="@+id/example"
+            android:icon="@drawable/multimedia"
+            android:title="@string/example" />
+        <item
+            android:id="@+id/question"
+            android:icon="@drawable/mark"
+            android:title="@string/question" />
+        <item
+            android:id="@+id/quiz"
+            android:icon="@drawable/square"
+            android:title="@string/quiz" />
+        <item
+            android:id="@+id/sett"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/setting" />
+    </group>
+
+</menu>
