@@ -15,10 +15,6 @@
             android:icon="@drawable/mark"
             android:title="@string/question" />
         <item
-            android:id="@+id/quiz"
-            android:icon="@drawable/square"
-            android:title="@string/quiz" />
-        <item
             android:id="@+id/sett"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/setting" />

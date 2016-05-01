@@ -9,7 +9,9 @@
     <string name="quiz">Асуулт хариулт</string>
     <string name="setting">Тохиргоо</string>
     <string name="title">Өгөгдлийн нууцлал,аюулгүй байдал</string>
-
+    <string name="quest">Асуулт : </string>
+    <string name="answer">Хариулт : </string>
+    <string name="point">Оноо : </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

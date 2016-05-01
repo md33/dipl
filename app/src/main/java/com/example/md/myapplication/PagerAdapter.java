@@ -24,16 +24,13 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 2:
                 frag = new QuestionFrag();
                 break;
-            case 3:
-                frag = new QuizFrag();
-                break;
         }
         return frag;
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 
     @Override
@@ -48,9 +45,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 break;
             case 2:
                 title="Асуулт";
-                break;
-            case 3:
-                title="Асуулт хариулт";
                 break;
         }
 
