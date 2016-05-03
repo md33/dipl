@@ -2,14 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:tag="cards main container"
-    android:weightSum="1">
+    >
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="276dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="10dp"
@@ -23,15 +21,12 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -41,7 +36,6 @@
                             android:layout_column="0"
                             android:layout_marginLeft="5dp"
                             android:textSize="18dp" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -51,21 +45,16 @@
                             android:layout_column="1"
                             android:layout_marginLeft="25dp"
                             android:textSize="18dp" />
-
                     </RelativeLayout>
-
                 </TableRow>
-
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp">
-
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="90dp">
-
                         <TextView
                             android:text="Гүйцэтгэл : "
                             android:id="@+id/textView"
@@ -74,7 +63,6 @@
                             android:textColor="@color/cardview_dark_background"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp" />
-
                         <TextView
                             android:text="New Text"
                             android:id="@+id/point"
@@ -85,16 +73,11 @@
                             android:layout_toEndOf="@+id/textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
-
                     </RelativeLayout>
                 </TableRow>
-
             </TableLayout>
         </TableLayout>
-
     </android.support.v7.widget.CardView>
-
-
 </LinearLayout>
 
 

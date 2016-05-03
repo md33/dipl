@@ -4,8 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.example.md.myapplication.DataModel;
-import com.example.md.myapplication.ExampleOne;
+import com.example.md.myapplication.Answer;
+import com.example.md.myapplication.Question;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,7 +28,7 @@ public class Model {
     }
 
     public Cursor chapter() {
-        String query = "SELECT * FROM chapter";
+        String query = "SELECT * FROM chapters";
         Cursor cursor = dbHelper.exec(query);
         if(cursor == null) {
             return null;
@@ -36,33 +36,50 @@ public class Model {
         return cursor;
     }
     public Cursor title(){
-        String query = "SELECT * FROM title";
+        String query = "SELECT * FROM titles";
         Cursor cursor = dbHelper.exec(query);
         if(cursor == null) {
             return null;
         }
         return cursor;
     }
-    public Cursor content(){
-        String query = "SELECT * FROM contents";
+    public int extra(int id){
+        String query = "SELECT extra_id FROM extras WHERE content_id = '"+id+"'";
         Cursor cursor = dbHelper.exec(query);
-        if(cursor!= null){
-            return cursor ;
+        int extra_id=0;
+        if(cursor != null) {
+                if(cursor.moveToFirst())
+                extra_id = cursor.getInt(0);
 
+            return extra_id;
         }
-        Log.w("xaxa","null" + cursor);
+        return 0;
+    }
+    public String TextExtra(int id){
+        String extra = null;
+        Log.w("xaxa","id = send =  " + String.valueOf(id));
+        String query = "SELECT extra FROM extras WHERE extra_id = '"+id+"'";
+        Cursor cursor = dbHelper.exec(query);
+        if(cursor== null){
+            return null;
+        }else {
+            if(cursor.moveToFirst())
+                extra = cursor.getString(0);
+            return extra;
+        }
+
+    }
+    public Cursor contents(String title){
+        String query = "Select  A.content_id, A.content FROM contents A inner join titles B WHERE A.title_id = B.title_id AND B.title = '"+title+"'";
+        Cursor cursor = dbHelper.exec(query);
+
+        if(cursor!= null){
+                return cursor;
+        }
         return null;
     }
-    public Cursor question(){
-        String query = "Select * FROM equestion";
-        Cursor cursor = dbHelper.exec(query);
-        if(cursor != null){
-            return cursor;
-        }
-        return cursor;
-    }
     public Cursor answer(int id){
-        String query = "Select eanswertext FROM eanswer WHERE eanswer_id= "+id+"";
+        String query = "Select eanswer FROM eanswers WHERE eanswer_id= "+id+"";
         Cursor cursor = dbHelper.exec(query);
         if(cursor != null){
             return cursor;
@@ -70,38 +87,77 @@ public class Model {
         return cursor;
     }
     public Cursor count(int example_id){
-        String query = "SELECT COUNT(number) FROM eQuestion WHERE example_id = "+example_id+"";
+        String query = "SELECT COUNT(number) FROM eQuestions WHERE example_id = "+example_id+"";
         Cursor cursor = dbHelper.exec(query);
         if(cursor != null){
             return cursor;
         }
         return cursor;
     }
-    public Cursor point(){
-        String query = "Select * FROM points";
-        Cursor cursor = dbHelper.exec(query);
-        if(cursor != null){
-            return cursor;
-        }
-        return cursor;
-    }
-    public List<ExampleOne> getExample(int question_id) {
-        String query = "SELECT A.*, B.eAnswer_Id FROM eQuestion A INNER JOIN eAnswer B ON A.eQuestion_id = B.eQuestion_id WHERE B.equestion_id = "+question_id+" ORDER BY A.Number ASC";
+    public List<Question> getExample(int question_id) {
+        String query = "SELECT * FROM eQuestions WHERE example_id = '"+question_id+"'";
         Cursor cursor = dbHelper.exec(query);
         if(cursor == null) {
             return null;
         }
 
-        List<ExampleOne> questions = new ArrayList<ExampleOne>();
-        while(cursor.moveToNext()) {
-            int id = cursor.getInt(0);
-            ExampleOne question = new ExampleOne(id, cursor.getInt(1), cursor.getString(2), cursor.getString(3),cursor.getInt(4),cursor.getInt(6));
-            questions.add(question);
+        List<Question> questions = new ArrayList<Question>();
+        if(cursor.moveToFirst()){
+            do {
+                int id = cursor.getInt(0);
+
+                Question question = new Question(id, cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
+                Log.w("xaxa","id = "+id + "number = " +cursor.getInt(1)+"answer = " + cursor.getString(2) + "Hint = " + cursor.getString(3)
+                +"score = " + cursor.getInt(4)
+                );
+                questions.add(question);
+            }while (cursor.moveToNext());
         }
         return questions;
     }
+    public List<Answer> getAnswer(int questionId){
+        String query = "SELECT character , eAnswer  FROM eAnswers WHERE equestion_id = '"+questionId+"'";
+        Cursor cursor = dbHelper.exec(query);
+        if(cursor == null) {
+            return null;
+        }
+        List<Answer> answers = new ArrayList<Answer>();
+        while(cursor.moveToNext()) {
+            Answer answer = new Answer(cursor.getString(0),cursor.getString(1));
+            answers.add(answer);
+        }
+        return answers;
+    }
+    public List<Answer> getcAnswer(int questionId){
+        String query = "SELECT character FROM correctAnswer WHERE equestion_id = '"+questionId+"'";
+        Cursor cursor = dbHelper.exec(query);
+        if(cursor == null) {
+            return null;
+        }
+        List<Answer> canswers = new ArrayList<Answer>();
+        while(cursor.moveToNext()) {
+            Answer answer = new Answer(cursor.getString(0));
+            canswers.add(answer);
+        }
+        return canswers;
+    }
+    public ArrayList<String> getHeader(){
+        String query ="SELECt chapter FROM Chapters";
+        Cursor cursor = dbHelper.exec(query);
+        if(cursor == null)
+        {
+            return null;
+        }
+        ArrayList<String> headers = new ArrayList<>();
+        while (cursor.moveToNext()){
+            headers.add(cursor.getString(0));
+//            Log.w("xaxa","lol"+headers.get(1));
+        }
+        Log.w("xaxa","lol"+headers.get(1));
+        return headers;
+    }
     public ArrayList<DataModel> getdata(){
-        String query ="Select A.* , B.result FROM Example A  INNER JOIN Results B ON A.example_id = B.example_id";
+        String query ="Select A.* , B.result FROM Examples A  INNER JOIN Results B ON A.example_id = B.example_id";
         Cursor cursor = dbHelper.exec(query);
         if(cursor == null)
         {
@@ -114,5 +170,27 @@ public class Model {
             dataModels.add(dataModel);
         }
         return dataModels;
+    }
+    public List<String> getChild(String chapter){
+        Log.w("xaxa","chapter = "+ chapter);
+        String query ="SELECT chapter_id  FROM chapters WHERE chapter = '"+chapter+"'";
+        Cursor cursor = dbHelper.exec(query);
+        if(cursor.moveToFirst()) {
+            Log.w("xaxa", "id " + String.valueOf(cursor.getString(0)));
+        }
+        int id = cursor.getInt(0);
+        Log.w("xaxa","id "+ String.valueOf(cursor.getString(0)));
+        String query1 = "SELECt title FROM titles WHERE chapter_id = "+id+"";
+        Cursor cursor1 = dbHelper.exec(query1);
+        if(cursor1 == null)
+        {
+            return null;
+        }
+        List<String> child = new ArrayList<String>();
+        if(cursor1.moveToFirst())
+            do{
+        child.add(cursor1.getString(0));
+            }while (cursor1.moveToNext());
+        return child;
     }
 }

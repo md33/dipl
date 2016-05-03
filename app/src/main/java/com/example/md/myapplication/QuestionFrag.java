@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.md.myapplication.R;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -42,9 +42,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        mFragmentManager = getSupportFragmentManager();
-//        mFragmentTransaction = mFragmentManager.beginTransaction();
-//        mFragmentTransaction.replace(R.id.containerView,new TabFragment()).commit();
         tabLayout= (TabLayout) findViewById(R.id.tab_layout);
         pager= (ViewPager) findViewById(R.id.view_pager);
         FragmentManager manager=getSupportFragmentManager();
@@ -52,7 +49,6 @@ public class MainActivity extends AppCompatActivity
         pager.setAdapter(adapter);
 
         tabLayout.setupWithViewPager(pager);
-        // mTabLayout.setupWithViewPager(mPager1);
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.setTabsFromPagerAdapter(adapter);

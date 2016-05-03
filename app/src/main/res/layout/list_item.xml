@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/list"
+        android:layout_marginRight="11dp">
+
+        <TextView
+            android:id="@+id/lblListItem"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:minHeight="20dp"
+            android:maxHeight="40dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/imageView2"
+            android:layout_toEndOf="@+id/imageView2"
+            android:layout_marginLeft="5dp"
+            android:maxLines="2" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:src="@drawable/dot"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_weight="0"
+            android:minHeight="10dp"
+            android:maxWidth="10dp"
+            android:maxHeight="10dp"
+            android:minWidth="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="5dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
