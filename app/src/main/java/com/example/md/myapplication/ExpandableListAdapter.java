@@ -30,7 +30,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Context _context;
     private List<String> _listDataHeader; // header titles
     private HashMap<String, List<String>> _listDataChild;
-    boolean ischecked;
 
     public ExpandableListAdapter(Context context, List<String> listDataHeader,
                                  HashMap<String, List<String>> listChildData) {
@@ -68,7 +67,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
         RelativeLayout relativeLayout = (RelativeLayout)convertView.findViewById(R.id.list);
-//        relativeLayout.setBackgroundColor(new ColorGenerator().ColorGenerator());
         txtListChild.setText(childText);
 
         return convertView;
@@ -129,6 +127,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         return convertView;
+
     }
 
     @Override
@@ -143,3 +142,4 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 }
+

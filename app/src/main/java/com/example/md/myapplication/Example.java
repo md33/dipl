@@ -45,7 +45,7 @@ public class Example extends AppCompatActivity implements RadioGroup.OnCheckedCh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example);
-        Toast.makeText(this,"ex_id ="+example_id,Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this,"ex_id ="+example_id,Toast.LENGTH_SHORT).show();
         Log.w("xaxa", "intent id  = "+getIntent().getStringExtra("id"));
         example_id = getIntent().getIntExtra("id", 0);
 //        example_id = Integer.parseInt( getIntent().getStringExtra("id"));
@@ -84,8 +84,7 @@ public class Example extends AppCompatActivity implements RadioGroup.OnCheckedCh
         }
          example =
                 model.getExample(example_id);
-        Answer = model.getAnswer(i+1);
-        correctAnswer = model.getcAnswer(i+1);
+
         setAll();
 
 
@@ -99,7 +98,7 @@ public class Example extends AppCompatActivity implements RadioGroup.OnCheckedCh
             //question.setText(example.get(1).getHint());
             Log.w("xaxa", "lolaaaa");
 
-            Log.w("xaxa", "id" + String.valueOf(example.get(i).getId()));
+//            Log.w("xaxa", "id" + String.valueOf(example.get(i).getId()));
             question.setText("Асуулт : "+String.valueOf(example.get(i).getNumber())+". "+example.get(i).getQuestion());
             current.setText("Асуулт : "+String.valueOf(example.get(i).getNumber())+" / "+count);
             hints =  example.get(0).getHint();
@@ -110,7 +109,8 @@ public class Example extends AppCompatActivity implements RadioGroup.OnCheckedCh
             answersRg.setOnCheckedChangeListener(this);
             this.answerChecked = false;
 
-
+            Answer = model.getAnswer(i+1);
+            correctAnswer = model.getcAnswer(i+1);
             answerRb = new RadioButton[Answer.size()];
             for(int i = 0; i < Answer.size(); i ++) {
                 answerRb[i] = new RadioButton(this);
@@ -126,8 +126,9 @@ public class Example extends AppCompatActivity implements RadioGroup.OnCheckedCh
         }
 
         } else {
-            Intent result = new Intent(this, Result.class);
-            result.putExtra("","");
+            Intent result = new Intent();
+            result.setClassName("com.example.md.myapplication","com.example.md.myapplication.Result");
+            result.putExtra("score", score);
             startActivity(result);
         }
 
@@ -148,10 +149,10 @@ public class Example extends AppCompatActivity implements RadioGroup.OnCheckedCh
 
             for (int i = 0; i < Answer.size(); i++) {
 
-               Toast.makeText(this,Answer.get(checkedId).getcharacter() +" = " + correctAnswer.get(i).getcharacter(),Toast.LENGTH_SHORT).show();
+             //  Toast.makeText(this,Answer.get(checkedId).getcharacter() +" = " + correctAnswer.get(i).getcharacter(),Toast.LENGTH_SHORT).show();
                 if (Answer.get(checkedId).getcharacter().equals(correctAnswer.get(i).getcharacter())) {
-                    Toast.makeText(this,"yeah",Toast.LENGTH_SHORT).show();
-
+                  //  Toast.makeText(this,"yeah",Toast.LENGTH_SHORT).show();
+                    score++;
                 }
             }
         }
@@ -174,12 +175,12 @@ public class Example extends AppCompatActivity implements RadioGroup.OnCheckedCh
         Log.w("xaxa","answer "+String.valueOf(answer));
         Log.w("xaxa","check "+String.valueOf(check));
         if(answer.equals(check)){
-            Toast.makeText(this,"yeah",Toast.LENGTH_SHORT).show();
+          // Toast.makeText(this,"yeah",Toast.LENGTH_SHORT).show();
             score += currentScore;
             answers.setText("");
         }else {
 
-            Toast.makeText(this,"lol",Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this,"lol",Toast.LENGTH_SHORT).show();
             answers.setText("");
         }
     }
@@ -195,7 +196,7 @@ public class Example extends AppCompatActivity implements RadioGroup.OnCheckedCh
                 setAll();
             break;
             case R.id.hints:
-                Toast.makeText(getBaseContext(),"CLicked",Toast.LENGTH_LONG).show();
+               // Toast.makeText(getBaseContext(),"CLicked",Toast.LENGTH_LONG).show();
                dialog(hints);
                 break;
 

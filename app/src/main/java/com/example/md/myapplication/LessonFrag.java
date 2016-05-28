@@ -2,11 +2,13 @@ package com.example.md.myapplication;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -53,7 +55,8 @@ public class LessonFrag extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_lesson, container, false);
+        final View view = inflater.inflate(R.layout.fragment_lesson, container, false);
+
 //        recyclerview = (RecyclerView) view.findViewById(R.id.rview);
 //        recyclerview.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
 //        List<ExpandableListAdapter.Item> data = new ArrayList<>();
@@ -63,6 +66,7 @@ public class LessonFrag extends Fragment {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 //        Cursor cursor= model.chapter();
 //        Cursor cursor1 = model.title();
 //        Cursor cursor2 = model.content();
@@ -121,7 +125,7 @@ public class LessonFrag extends Fragment {
                 intent.setClassName("com.example.md.myapplication","com.example.md.myapplication.Description");
                 String string =  listDataChild.
                         get(listDataHeader.get(groupPosition)).get(childPosition);
-                Toast.makeText(getContext(), string, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), string, Toast.LENGTH_SHORT).show();
                 intent.putExtra("name",string);
                 startActivity(intent);
                 return false;

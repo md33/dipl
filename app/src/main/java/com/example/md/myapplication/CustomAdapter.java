@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.md.myapplication.db.DataModel;
@@ -19,14 +20,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewName,textViewpoint,textViewper;
-
+        ImageView start;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             this.textViewName = (TextView) itemView.findViewById(R.id.name);
             this.textViewpoint = (TextView) itemView.findViewById(R.id.point);
             this.textViewper = (TextView) itemView.findViewById(R.id.per);
-
+            this.start  = (ImageView)itemView.findViewById(R.id.start);
         }
     }
 

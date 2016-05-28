@@ -1,6 +1,7 @@
 package com.example.md.myapplication;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -8,8 +9,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity
     FragmentTransaction mFragmentTransaction;
         ViewPager pager;
         Model model;
+    String mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mode = getIntent().getStringExtra("mode");
 
         tabLayout= (TabLayout) findViewById(R.id.tab_layout);
         pager= (ViewPager) findViewById(R.id.view_pager);
@@ -61,6 +66,33 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        if(mode.equals("yeah"))
+        {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplication());
+
+            alertDialogBuilder.setTitle("Систем шинчлэл");
+            alertDialogBuilder.setMessage("Системд шинчлэл гарсан тулд та шинчлэл хийх үү?");
+            // set positive button: Yes message
+            alertDialogBuilder.setPositiveButton("Тийм",new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,int id) {
+                    // go to a new activity of the app
+                }
+            });
+            // set negative button: No message
+            alertDialogBuilder.setNegativeButton("Үгүй",new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,int id) {
+                    // cancel the alert box and put a Toast to the user
+                    dialog.cancel();
+                    Toast.makeText(getApplication(), "You chose a negative answer",
+                            Toast.LENGTH_LONG).show();
+                }
+            });
+            // set neutral button: Exit the app message
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            // show alert
+            alertDialog.show();
+        }
     }
 
     @Override
@@ -82,8 +114,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
             switch (id){
                 case R.id.lesson:
+                    pager.setCurrentItem(0);
                     break;
                 case R.id.example:
+                    pager.setCurrentItem(1);
+                    break;
+                case R.id.question:
+                    pager.setCurrentItem(2);
                     break;
                 case R.id.sett:
                     break;

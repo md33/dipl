@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Splash extends AppCompatActivity {
 
@@ -76,6 +77,7 @@ public class Splash extends AppCompatActivity {
     };
 
     private TextView title, title1;
+    Boolean isInternetPresent = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,10 +114,20 @@ public class Splash extends AppCompatActivity {
     public void onFinish() {
         ProgressBar progressBar = (ProgressBar)findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
-        receiver = new NetworkChangeReceiver();
-
+        NetworkChangeReceiver cd = new NetworkChangeReceiver(getApplicationContext());
+        isInternetPresent = cd.isConnectingToInternet();
+        if (isInternetPresent) {
+            // Internet Connection is Present
+            // make HTTP requests
+            Toast.makeText(getApplication(),"yeah",Toast.LENGTH_SHORT).show();
+           } else {
+            // Internet connection is not present
+            // Ask user to connect to Internet
+            Toast.makeText(getApplication(),"bad",Toast.LENGTH_SHORT).show();
+        }
         Intent intent = new Intent();
         intent.setClassName("com.example.md.myapplication","com.example.md.myapplication.MainActivity");
+        intent.putExtra("mode","true");
         startActivity(intent);
         finish();
                 }

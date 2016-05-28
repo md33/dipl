@@ -16,15 +16,16 @@
         android:layout_height="match_parent"
         android:id="@+id/back">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:src="@drawable/circle_plus"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="0"/>
+        <android.support.v4.widget.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/view3"
+            android:layout_weight="0"
+            android:minHeight="30dp"
+            android:minWidth="30dp" />
 
         <TextView
-            android:id="@+id/lblListHeader"
+            android:id="@+id/question"
 
             android:textSize="20dp"
             android:gravity="center_vertical"
@@ -32,6 +33,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
-            android:textStyle="normal" />
+            android:textColor="#ffffff" />
     </LinearLayout>
 </LinearLayout>

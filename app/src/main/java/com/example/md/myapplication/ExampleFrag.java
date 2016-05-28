@@ -81,7 +81,7 @@ public class ExampleFrag extends Fragment {
             TextView id
                     = (TextView) viewHolder.itemView.findViewById(R.id.per);
             String selectid = (String) id.getText();
-            Toast.makeText(getContext(),selectid,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(),selectid,Toast.LENGTH_SHORT).show();
             Log.w("xaxa","id =" +selectid);
             exam(Integer.parseInt(selectid));
 

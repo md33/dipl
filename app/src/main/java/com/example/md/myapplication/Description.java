@@ -59,7 +59,7 @@ public class Description extends AppCompatActivity {
 //        });
     }
     public void init(){
-        Toast.makeText(this,"name = " +name ,Toast.LENGTH_LONG).show();
+//        Toast.makeText(this,"name = " +name ,Toast.LENGTH_LONG).show();
         SpannableString s = new SpannableString(name);
         s.setSpan(new RelativeSizeSpan(0.75f),  2, 3, 0);
         setTitle(s);
@@ -101,7 +101,7 @@ public class Description extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Log.w("xaxa","no extra but example");
-                       Toast.makeText(getBaseContext(),"no extra but example",Toast.LENGTH_SHORT).show();
+//                       Toast.makeText(getBaseContext(),"no extra but example",Toast.LENGTH_SHORT).show();
                     }
                 });
                 this.desc.addView(textView);
@@ -123,7 +123,7 @@ public class Description extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Log.w("xaxa", " extra no example" + extra_id);
-                        Toast.makeText(getBaseContext(), " extra no example", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getBaseContext(), " extra no example", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent();
                         intent.setClassName("com.example.md.myapplication", "com.example.md.myapplication.more");
                         intent.putExtra("extra", extra_id);
@@ -145,7 +145,7 @@ public class Description extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Log.w("xaxa", "click extra but example");
-                        Toast.makeText(getBaseContext(), "click extra but example", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getBaseContext(), "click extra but example", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent();
                         intent.setClassName("com.example.md.myapplication", "com.example.md.myapplication.more");
                         intent.putExtra("extra", extra_id);
@@ -166,7 +166,7 @@ public class Description extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent();
                         Log.w("xaxa", " extra click example");
-                        Toast.makeText(getBaseContext(), " extra click example", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getBaseContext(), " extra click example", Toast.LENGTH_SHORT).show();
                         intent.setClassName("com.example.md.myapplication", "com.example.md.myapplication.more");
                         intent.putExtra("extra", extra_id);
                         intent.putExtra("name", name);
