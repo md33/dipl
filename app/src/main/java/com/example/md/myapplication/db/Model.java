@@ -35,9 +35,35 @@ public class Model {
         }
         return cursor;
     }
+    public int version() {
+        int version = 0;
+        String query = "SELECT last_id FROM version";
+        Cursor cursor = dbHelper.exec(query);
+        if (cursor != null) {
+            if (cursor.moveToFirst())
+                version = cursor.getInt(0);
+
+        }
+        return version;
+    }
+    public void run(String query){
+            Log.w("lol","query"+""+query+"");
+            dbHelper.exec(""+query+"");
+            Cursor cursor = dbHelper.exec("Select * From questions");
+            dbHelper.run(""+query+"");
+            if(cursor!=null);
+            if(cursor.moveToNext()){
+                do {
+                    Log.w("lol", "zz" + String.valueOf(cursor.getInt(0)));
+                    Log.w("lol", cursor.getString(1));
+                }while (cursor.moveToNext());
+            }
+            Log.w("lol","yeahehaeha");
+    }
     public Cursor title(){
         String query = "SELECT * FROM titles";
         Cursor cursor = dbHelper.exec(query);
+
         if(cursor == null) {
             return null;
         }

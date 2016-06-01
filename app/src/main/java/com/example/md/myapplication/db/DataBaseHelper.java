@@ -125,5 +125,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		return myDataBase.rawQuery(sql, null);
 
 	}
-	
+	public void run(String query){
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL(query);
+
+	}
 }

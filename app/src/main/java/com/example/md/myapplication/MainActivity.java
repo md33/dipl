@@ -70,30 +70,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
      /*  if(mode.equals("yeah"))
         {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplication());
 
-            alertDialogBuilder.setTitle("Систем шинчлэл");
-            alertDialogBuilder.setMessage("Системд шинчлэл гарсан тулд та шинчлэл хийх үү?");
-            // set positive button: Yes message
-            alertDialogBuilder.setPositiveButton("Тийм",new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int id) {
-                    // go to a new activity of the app
-                }
-            });
-            // set negative button: No message
-            alertDialogBuilder.setNegativeButton("Үгүй",new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int id) {
-                    // cancel the alert box and put a Toast to the user
-                    dialog.cancel();
-                    Toast.makeText(getApplication(), "You chose a negative answer",
-                            Toast.LENGTH_LONG).show();
-                }
-            });
-            // set neutral button: Exit the app message
-
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            // show alert
-            alertDialog.show();
         }*/
     }
 
