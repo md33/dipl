@@ -1,8 +1,10 @@
 package com.example.md.myapplication;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,14 +109,19 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_group, null);
+            convertView.setBackgroundColor(new ColorGenerator().ColorGenerator());
+            //convertView.setBackgroundResource(R.color.colorPrimary);
         }
 
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
+        lblListHeader.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        lblListHeader.setSelected(true);
         ImageView img=(ImageView)convertView.findViewById(R.id.imageView);
         LinearLayout linearLayout = (LinearLayout)convertView.findViewById(R.id.back);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
-        linearLayout.setBackgroundColor(new ColorGenerator().ColorGenerator());
+        lblListHeader.setTypeface(null, Typeface.NORMAL);
+
+
         lblListHeader.setText(headerTitle);
 
         if(isExpanded)

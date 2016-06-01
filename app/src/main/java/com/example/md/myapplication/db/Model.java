@@ -141,6 +141,28 @@ public class Model {
         }
         return canswers;
     }
+    public Cursor question(){
+        String query ="SELECT question_id as _id , question FROM Questions";
+        Cursor cursor = dbHelper.exec(query);
+        if(cursor == null)
+        {
+            return null;
+        }
+        return cursor;
+    }
+    public Cursor Qanswer(int id) {
+        String query = "Select A.question , B.answer FROM Questions A  INNER JOIN Answers B ON A.question_id = B.question_id WHERE A.question_id = '" + id + "'";
+        Cursor cursor = dbHelper.exec(query);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    Log.w("lol", "lll" + cursor.getString(0) +
+                            cursor.getString(1));
+                } while (cursor.moveToNext());
+            }
+        }
+        return cursor;
+    }
     public ArrayList<String> getHeader(){
         String query ="SELECt chapter FROM Chapters";
         Cursor cursor = dbHelper.exec(query);
@@ -193,4 +215,5 @@ public class Model {
             }while (cursor1.moveToNext());
         return child;
     }
+
 }

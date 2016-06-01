@@ -91,7 +91,8 @@ public class Example extends AppCompatActivity implements RadioGroup.OnCheckedCh
     }
     public void setAll(){
         if(i<=count){
-
+            Log.w("lol","I" + String.valueOf(i));
+            Log.w("lol","c" + String.valueOf(count));
 
         Log.w("xaxa","size"+ String.valueOf(example.size()));
         if(example.size() > 0) {
@@ -104,7 +105,7 @@ public class Example extends AppCompatActivity implements RadioGroup.OnCheckedCh
             hints =  example.get(0).getHint();
             currentScore = example.get(0).getScore();
 
-            scoret.setText("Оноо : " + score);
+            //scoret.setText("Оноо : " + score);
              answersRg = (RadioGroup) findViewById(R.id.answersRg);
             answersRg.setOnCheckedChangeListener(this);
             this.answerChecked = false;
@@ -146,10 +147,11 @@ public class Example extends AppCompatActivity implements RadioGroup.OnCheckedCh
 
             RadioButton checkedRd = (RadioButton) findViewById(checkedId);
             checkedRd.setTextColor(Color.parseColor("#009933"));
-
+            Log.w("lol",Answer.get(checkedId) + " : " + correctAnswer.get(i).getcharacter());
             for (int i = 0; i < Answer.size(); i++) {
 
              //  Toast.makeText(this,Answer.get(checkedId).getcharacter() +" = " + correctAnswer.get(i).getcharacter(),Toast.LENGTH_SHORT).show();
+                Log.w("lol",Answer.get(checkedId) + " : " + correctAnswer.get(i).getcharacter());
                 if (Answer.get(checkedId).getcharacter().equals(correctAnswer.get(i).getcharacter())) {
                   //  Toast.makeText(this,"yeah",Toast.LENGTH_SHORT).show();
                     score++;
@@ -188,6 +190,12 @@ public class Example extends AppCompatActivity implements RadioGroup.OnCheckedCh
         switch (view.getId()){
             case R.id.next :
                 i++;
+//                if(i==4)
+//                {
+//                    Intent result = new Intent(this, Result.class);
+//                    startActivity(result);
+//                }
+
 //                 check = answers.getText().toString();
 //                checkAns(answ_id,check);
 //                answers.setText("");

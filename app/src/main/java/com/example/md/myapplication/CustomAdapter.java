@@ -44,6 +44,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         view.setOnClickListener(ExampleFrag.myOnClickListener);
 
         MyViewHolder myViewHolder = new MyViewHolder(view);
+
         return myViewHolder;
     }
 

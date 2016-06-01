@@ -5,17 +5,35 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Splash extends AppCompatActivity {
 
@@ -24,6 +42,7 @@ public class Splash extends AppCompatActivity {
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private NetworkChangeReceiver receiver;
+    String JSON;
     private View mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
@@ -120,6 +139,7 @@ public class Splash extends AppCompatActivity {
             // Internet Connection is Present
             // make HTTP requests
             Toast.makeText(getApplication(),"yeah",Toast.LENGTH_SHORT).show();
+            getDAta();
            } else {
             // Internet connection is not present
             // Ask user to connect to Internet
@@ -185,4 +205,85 @@ public class Splash extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
         }
+    public void getDAta(){
+    class GetDataJSON extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            DefaultHttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
+            HttpPost httppost = new HttpPost("http://192.168.1.115/webservice/check.php");
+
+            // Depends on your web service
+            httppost.setHeader("Content-type", "application/json");
+
+            InputStream inputStream = null;
+            String result = null;
+            try {
+                HttpResponse response = httpclient.execute(httppost);
+                HttpEntity entity = response.getEntity();
+
+                inputStream = entity.getContent();
+                // json is UTF-8 by default
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
+                StringBuilder sb = new StringBuilder();
+
+                String line = null;
+                while ((line = reader.readLine()) != null)
+                {
+                    sb.append(line + "\n");
+                }
+                result = sb.toString();
+            } catch (Exception e) {
+                // Oops
+            }
+            finally {
+                try{if(inputStream != null)inputStream.close();}catch(Exception squish){}
+            }
+            return result;
+        }
+        @Override
+        protected void onPostExecute(String result){
+            JSON=result;
+            try {
+                extract(JSON);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    GetDataJSON g = new GetDataJSON();
+    g.execute();
+        Log.w("lol","G" + g.toString());
+    }
+    public void extract(String Json) throws JSONException {
+        ArrayList<HashMap<String, String>> Updatelist;
+        JSONArray Updates = null;
+        Updatelist = new ArrayList<HashMap<String, String>>();
+        if (Json != null) {
+            try {
+                JSONObject jsonObj = new JSONObject(Json);
+
+                // Getting JSON Array node
+                Updates = jsonObj.getJSONArray("result");
+                for (int i = 0; i < Updates.length(); i++) {
+                    JSONObject c = Updates.getJSONObject(i);
+                    String id = c.getString("update_id");
+                    Log.w("lol","oject : " +id);
+                    String log = c.getString("log");
+                    Log.w("lol","oject : " +log);
+                    HashMap<String, String> updat = new HashMap<String, String>();
+                    updat.put(id,log);
+                    Log.w("lol","updat : " +updat.toString());
+                    Updatelist.add(updat);
+
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.e("ServiceHandler", "Couldn't get any data from the url");
+        }
+
+    }
 }

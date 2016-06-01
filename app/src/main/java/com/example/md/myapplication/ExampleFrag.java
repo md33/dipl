@@ -19,8 +19,13 @@ import com.example.md.myapplication.R;
 import com.example.md.myapplication.db.DataModel;
 import com.example.md.myapplication.db.Model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class ExampleFrag extends Fragment {
@@ -57,7 +62,9 @@ public class ExampleFrag extends Fragment {
         data = model.getdata();
 
         adapter = new CustomAdapter(data);
+
         recyclerView.setAdapter(adapter);
+        lol();
         return view;
     }
 
@@ -78,6 +85,8 @@ public class ExampleFrag extends Fragment {
             int selectedItemPosition = recyclerView.getChildPosition(v);
             RecyclerView.ViewHolder viewHolder
                     = recyclerView.findViewHolderForPosition(selectedItemPosition);
+
+
             TextView id
                     = (TextView) viewHolder.itemView.findViewById(R.id.per);
             String selectid = (String) id.getText();
@@ -92,6 +101,60 @@ public class ExampleFrag extends Fragment {
         intent.setClassName("com.example.md.myapplication", "com.example.md.myapplication.Example");
         intent.putExtra("id", id);
         startActivity(intent);
+
+    }
+    public void lol(){
+        Log.w("lol","blabla");
+        String json = "{\n" +
+                "    \"result\": [\n" +
+                "        {\n" +
+                "                \"update_id\": \"c200\",\n" +
+                "                \"log\": \"Ravi Tamada\",\n" +
+                "                }\n" +
+                "        },\n" +
+                "        {\n" +
+                "                \"update_id\": \"c201\",\n" +
+                "                \"log\": \"Johnny Depp\",\n" +
+                "                }\n" +
+                "        },\n" +
+                "}";
+        ArrayList<HashMap<String, String>> Updatelist;
+        JSONArray Updates = null;
+        Updatelist = new ArrayList<HashMap<String, String>>();
+        if (json != null) {
+
+            try {
+                Log.w("lol","blabla2");
+                JSONObject jsonObj = new JSONObject(json);
+                Log.w("lol","blabla2");
+                // Getting JSON Array node
+                Updates = jsonObj.getJSONArray("result");
+                for (int i = 0; i < Updates.length(); i++) {
+                    JSONObject c = Updates.getJSONObject(i);
+                    String id = c.getString("update_id");
+                    Log.w("lol","oject : " +id);
+                    String log = c.getString("log");
+                    Log.w("lol","oject : " +log);
+                    JSONObject update = c.getJSONObject("Update");
+                    String mobile = update.getString("id");
+                    Log.w("lol","id 2oject : " +mobile);
+                    String home = update.getString("log");
+                    Log.w("lol","log 2.2oject : " +home);
+                    HashMap<String, String> updat = new HashMap<String, String>();
+                    updat.put(id,mobile);
+
+                    updat.put(log,home);
+                    Log.w("lol","updat : " +updat.toString());
+                    Updatelist.add(updat);
+
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.e("ServiceHandler", "Couldn't get any data from the url");
+        }
 
     }
 }

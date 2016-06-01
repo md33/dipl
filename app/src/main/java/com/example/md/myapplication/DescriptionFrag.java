@@ -1,73 +1,49 @@
 package com.example.md.myapplication;
 
-import android.annotation.TargetApi;
+import android.app.Fragment;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
-import android.text.style.TypefaceSpan;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.md.myapplication.db.Model;
 
 import java.sql.SQLException;
 
-public class Description extends AppCompatActivity {
+/**
+ * Created by md_moogii0306 on 5/31/2016.
+ */
+public class DescriptionFrag extends Fragment {
     Model model;
+    View view;
+    String name;
     String large;
     int id,extra_id = 0,example_id=0;
     TextView largetext;
     LinearLayout desc;
-    String name;
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_description);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-         desc = (LinearLayout)findViewById(R.id.desc);
-        largetext=(TextView)findViewById(R.id.large);
-
-
-        setSupportActionBar(toolbar);
-         name = getIntent().getStringExtra("name");
-            init();
-
-//        Toast.makeText(this,large,Toast.LENGTH_LONG).show();
-    //    final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setBackground(getDrawable(R.drawable.on));
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Snackbar.make(view, large, Snackbar.LENGTH_LONG)
-////                        .setAction("Action", null).show();
-//
-//
-//            }
-//        });
+    DescriptionFrag(String name){
+        this.name= name;
+    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+         view = inflater.inflate(R.layout.activity_description, container, false);
+        desc = (LinearLayout)view.findViewById(R.id.desc);
+        largetext=(TextView)view.findViewById(R.id.large);
+        return view;
     }
     public void init(){
 //        Toast.makeText(this,"name = " +name ,Toast.LENGTH_LONG).show();
-        SpannableString s = new SpannableString(name);
-        s.setSpan(new RelativeSizeSpan(0.5f),  2, 3, 0);
-
-        setTitle(s);
         try {
-            model = new Model(this);
+            model = new Model(view.getContext());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -95,7 +71,7 @@ public class Description extends AppCompatActivity {
                 largetext.setText(large);
                 Toolbar.LayoutParams lparams = new Toolbar.LayoutParams(
                         Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
-                TextView textView = new TextView(this);
+                TextView textView = new TextView(view.getContext());
                 textView.setLayoutParams(lparams);
                 textView.setText("                                         Жишээ ажиллах...");
                 textView.setTextColor(Color.parseColor("#03A9F4"));
@@ -117,7 +93,7 @@ public class Description extends AppCompatActivity {
                 largetext.setText(large);
                 Toolbar.LayoutParams lparams = new Toolbar.LayoutParams(
                         Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
-                TextView textView = new TextView(this);
+                TextView textView = new TextView(view.getContext());
                 textView.setLayoutParams(lparams);
                 textView.setText("                                         Дэлгэрэнгүй...");
                 textView.setTextColor(Color.parseColor("#03A9F4"));
@@ -139,7 +115,7 @@ public class Description extends AppCompatActivity {
                 largetext.setText(large);
                 Toolbar.LayoutParams lparams = new Toolbar.LayoutParams(
                         Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
-                TextView textView = new TextView(this);
+                TextView textView = new TextView(view.getContext());
                 textView.setLayoutParams(lparams);
                 textView.setText("                                         Дэлгэрэнгүй...");
                 textView.setTextColor(Color.parseColor("#03A9F4"));
@@ -159,7 +135,7 @@ public class Description extends AppCompatActivity {
                 this.desc.addView(textView);
                 Toolbar.LayoutParams lparams2 = new Toolbar.LayoutParams(
                         Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
-                TextView textView2 = new TextView(this);
+                TextView textView2 = new TextView(view.getContext());
                 textView2.setLayoutParams(lparams);
                 textView2.setText("                                         Жишээ ажиллах...");
                 textView2.setTextColor(Color.parseColor("#03A9F4"));
@@ -178,7 +154,7 @@ public class Description extends AppCompatActivity {
                 });
                 this.desc.addView(textView2);
             }
-            }
+        }
 
     }
 }

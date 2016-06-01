@@ -1,38 +1,58 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:paddingLeft="13dp"
-    android:paddingStart="13dp"
-    android:paddingRight="10dp"
-    android:paddingEnd="10dp"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp"
     android:layout_width="match_parent"
+    android:maxHeight="100dp"
+
     android:layout_height="wrap_content">
+
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/back">
+        android:id="@+id/back"
+        android:minHeight="50dp">
 
-        <android.support.v4.widget.CircleImageView
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:id="@+id/view3"
-            android:layout_weight="0"
-            android:minHeight="30dp"
-            android:minWidth="30dp" />
+            android:minHeight="50dp"
+
+            android:minWidth="50dp"
+            android:background="@drawable/circle" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:id="@+id/id"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:text="1"
+                android:maxWidth="40dp"
+                android:maxHeight="40dp"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/question"
 
             android:textSize="20dp"
             android:gravity="center_vertical"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
-            android:textColor="#ffffff" />
+            android:textColor="#000000"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:text="aa" />
     </LinearLayout>
 </LinearLayout>

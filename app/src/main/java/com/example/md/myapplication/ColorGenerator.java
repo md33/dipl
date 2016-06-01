@@ -11,12 +11,9 @@ import java.util.Random;
 public class ColorGenerator {
 
     List<Integer> DEF = new ArrayList<Integer>();
-    int[] def = { 0xfff16364,
+    int[] def = {
             0xfff58559,
             0xfff9a43e,
-            0xffe4c62e,
-            0xff67bf74,
-            0xff59a2be,
             0xff2093cd,
             0xffad62a7,
             0xff805781,

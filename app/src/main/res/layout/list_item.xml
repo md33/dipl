@@ -7,9 +7,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="30dp"
-        android:id="@+id/list"
-        android:layout_marginRight="11dp">
+        android:layout_marginLeft="50dp"
+        android:id="@+id/list">
 
         <TextView
             android:id="@+id/lblListItem"
