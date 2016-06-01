@@ -222,7 +222,7 @@ public class Splash extends AppCompatActivity {
             @Override
             protected String doInBackground(String... params) {
                 DefaultHttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
-                HttpPost httppost = new HttpPost("http://192.168.1.115/webservice/updates.php");
+                HttpPost httppost = new HttpPost("http://192.168.1.2/webservice/updates.php");
 
 
                 // Depends on your web service
@@ -288,6 +288,7 @@ public class Splash extends AppCompatActivity {
                     Log.w("lol","oject log : " +log);
                     if(Check<Integer.parseInt(id)){
                         model.run(log);
+                        Log.w("lol","run " + log);
                     }
 
 
@@ -298,7 +299,8 @@ public class Splash extends AppCompatActivity {
         } else {
             Log.e("ServiceHandler", "Couldn't get any data from the url");
         }
-        Log.w("lol","last : " + id.toString());
+//        model.run("UPDATE `version` SET `last_id`='"+id.toString()+"'");
+
 
     }
 }
